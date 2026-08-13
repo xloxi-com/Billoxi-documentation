@@ -1,69 +1,139 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import { Cta } from "@/components/home/Cta";
+import { DocumentTypes } from "@/components/home/DocumentTypes";
+import { FeatureGrid } from "@/components/home/FeatureGrid";
+import { Hero } from "@/components/home/Hero";
+import { HowItWorks } from "@/components/home/HowItWorks";
+import { FaqList } from "@/components/FaqList";
+import { JsonLd } from "@/components/JsonLd";
+import { PricingToggle } from "@/components/PricingToggle";
+import { sisterApps, techStack } from "@/lib/content";
+import { faqJsonLd, pageMeta, seo, softwareJsonLd } from "@/lib/seo";
+import Link from "next/link";
+
+const homeMeta = pageMeta({
+  title: seo.title,
+  description: seo.description,
+  path: "/",
+});
+
+export const metadata: Metadata = {
+  ...homeMeta,
+  title: { absolute: seo.title },
+  openGraph: {
+    ...homeMeta.openGraph,
+    title: seo.title,
+  },
+  twitter: {
+    ...homeMeta.twitter,
+    title: seo.title,
+  },
+};
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <>
+      <JsonLd data={[softwareJsonLd(), faqJsonLd()]} />
+      <Hero />
+      <HowItWorks />
+      <DocumentTypes />
+      <FeatureGrid />
+
+      <section className="border-y border-line bg-card/40">
+        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-lime">
+                Pricing
+              </p>
+              <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+                Simple plans. Yearly saves 20%.
+              </h2>
+            </div>
+            <Link
+              href="/pricing"
+              className="text-sm text-muted transition-colors hover:text-lime"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              Full comparison →
+            </Link>
+          </div>
+          <div className="mt-10">
+            <PricingToggle ctaHref="/pricing" />
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-lime">
+              FAQ
+            </p>
+            <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+              Straight answers.
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-muted">
+              Totals stay in Shopify. Email needs SMTP. SKU and barcode print as
+              text — not generated images.
+            </p>
+            <Link
+              href="/faq"
+              className="mt-6 inline-block text-sm text-lime hover:underline"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              All questions →
+            </Link>
+          </div>
+          <FaqList />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section className="border-t border-line">
+        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-2">
+          <div>
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-lime">
+              From XLOXI
+            </p>
+            <h2 className="font-display mt-3 text-2xl font-semibold">
+              Recommended apps
+            </h2>
+            <div className="mt-6 grid gap-3">
+              {sisterApps.map((app) => (
+                <div
+                  key={app.name}
+                  className="rounded-2xl border border-line bg-card px-5 py-4"
+                >
+                  <p className="font-medium">{app.name}</p>
+                  <p className="mt-1 text-sm text-muted">{app.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-lime">
+              Case study
+            </p>
+            <h2 className="font-display mt-3 text-2xl font-semibold">
+              Built for Shopify Admin
+            </h2>
+            <p className="mt-3 text-sm leading-7 text-muted">
+              Embedded app with Polaris, GraphQL, webhooks, SMTP, and PDF
+              generation — hosted on Vercel.
+            </p>
+            <ul className="mt-6 flex flex-wrap gap-2">
+              {techStack.map((item) => (
+                <li
+                  key={item}
+                  className="rounded-full border border-line px-3 py-1.5 text-xs text-muted"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <Cta />
+    </>
   );
 }
