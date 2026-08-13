@@ -1,9 +1,10 @@
 export const site = {
   name: "Billoxi",
   company: "XLOXI",
+  legalName: "XLOXI PVT LTD",
   email: "billoxi@xloxi.com",
-  websiteUrl: "https://www.billoxi.xloxi.com",
-  websiteLabel: "www.billoxi.xloxi.com",
+  websiteUrl: "https://www.xloxi.com",
+  websiteLabel: "www.xloxi.com",
   appStoreUrl: "https://apps.shopify.com/billoxi",
   appUrl: "https://apps.shopify.com/billoxi",
   category: "Orders and shipping → Orders → Invoices and receipts",
@@ -350,6 +351,80 @@ export const faqs = [
     q: "Does admin language change the PDF?",
     a: "No. Admin language is for Billoxi menus and pages. PDF label language is set per template under Templates → Edit → Language.",
   },
+  {
+    q: "Is Billoxi a Shopify invoice app or only a packing slip printer?",
+    a: "Both. Billoxi creates sales orders, invoices, drafts, packing slips, credit notes, and returns from Shopify orders. You brand templates once, then print, download PDF, or email.",
+  },
+  {
+    q: "Can I use Billoxi for B2B company invoices?",
+    a: "Yes. List pages show a Company column. Documents can show company name, company ID, and VAT on the Bill To block using Shopify B2B / companies data.",
+  },
+  {
+    q: "Does Billoxi sync with QuickBooks or Xero?",
+    a: "No. Billoxi does not offer accounting sync. Line items and totals stay in Shopify. You print or email documents from the order.",
+  },
+  {
+    q: "Can I auto-create invoices when an order is paid?",
+    a: "Yes on Premium and Ultimate. Turn on auto invoice on paid in Settings. Credit notes can auto-create on cancel, full refund, or partial refund.",
+  },
+  {
+    q: "How many invoice template layouts are included?",
+    a: "Fifteen layout presets per document type on every paid plan, plus a full editor for logo, colors, fonts, paper size, language, and tax layout.",
+  },
+];
+
+export const seoUseCases = [
+  {
+    title: "DTC brands that need branded invoices",
+    body: "After checkout, customers still ask for a PDF invoice. Billoxi turns the Shopify order into a branded invoice you can print, download, or email — without copying line items by hand.",
+  },
+  {
+    title: "Warehouses that print packing slips",
+    body: "Convert a sales order into a packing slip for fulfillment. Print or download a PDF with SKU, barcode text, quantity, and your warehouse layout from the template gallery.",
+  },
+  {
+    title: "Stores that issue credit notes and returns",
+    body: "Create a credit note from an invoice, or convert a refunded order into a return document. Premium plans can auto-create credit notes on cancel or refund.",
+  },
+  {
+    title: "B2B merchants with company billing",
+    body: "Show company name on every list and print company ID and VAT on documents. Billoxi works with Shopify B2B / companies data for professional paperwork.",
+  },
+];
+
+export const seoGuide = {
+  kicker: "Shopify order documents",
+  title: "A Shopify invoice and packing slip app built for real order desks",
+  lead: "Billoxi by XLOXI is an embedded Shopify app for invoices, packing slips, credit notes, drafts, and returns. It reads the Shopify order so items, prices, discounts, tax, and totals stay accurate — then you brand, convert, print, download PDF, or email.",
+  sections: [
+    {
+      heading: "What Billoxi creates from a Shopify order",
+      body: "Every paid plan includes six document types: sales order, invoice, draft, packing slip, credit note, and return. Convert a sales order into an invoice, packing slip, or return as the order progresses. Finalize a draft into an invoice. Create a credit note from an invoice when you need to void or refund paperwork.",
+    },
+    {
+      heading: "Print, PDF download, or email",
+      body: "Open a live paper preview of your active template, then print from the browser, download a PDF, or send email through your own SMTP server with an optional PDF attachment. Bulk download ZIP files and bulk email are available on Premium and Ultimate. There is no mailto fallback — email needs SMTP in Settings.",
+    },
+    {
+      heading: "Templates and languages",
+      body: "Choose from fifteen layout presets per document type, then edit logo, colors, fonts, paper size (A5, A4, Letter), orientation, margins, tax layout, and labels. Document PDF labels support 104 languages. Admin UI language is separate and does not change the PDF.",
+    },
+    {
+      heading: "Automation and Shopify Admin",
+      body: "Premium plans can auto-create invoices when an order is paid and credit notes on cancel or refund. Ultimate adds customer PDF download links for Shopify notification emails, Shopify Admin order and draft extensions, and an activity log. Line items are never edited inside Billoxi — they always sync from Shopify.",
+    },
+  ],
+};
+
+export const seoKeywordsBlock = [
+  "Shopify invoice app",
+  "Shopify packing slip PDF",
+  "Shopify credit note",
+  "Order printer",
+  "Branded invoice templates",
+  "Draft order invoice",
+  "B2B company invoice",
+  "SMTP document email",
 ];
 
 export const settingsModules = [

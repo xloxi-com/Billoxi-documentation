@@ -4,7 +4,6 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { organizationJsonLd, seo, siteUrl, websiteJsonLd } from "@/lib/seo";
-import { site } from "@/lib/content";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -28,15 +27,16 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: seo.title,
-    template: "%s · Billoxi",
+    template: "%s · Billoxi by XLOXI",
   },
   description: seo.description,
   keywords: seo.keywords,
-  applicationName: site.name,
-  authors: [{ name: site.company, url: siteUrl }],
-  creator: site.company,
-  publisher: site.company,
+  applicationName: "Billoxi",
+  authors: [{ name: "XLOXI PVT LTD", url: siteUrl }],
+  creator: "XLOXI PVT LTD",
+  publisher: "XLOXI PVT LTD",
   category: "technology",
+  classification: "Shopify App — Invoices and receipts",
   referrer: "origin-when-cross-origin",
   formatDetection: {
     email: false,
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     address: false,
   },
   alternates: {
-    canonical: "/",
+    canonical: siteUrl,
   },
   icons: {
     icon: [
@@ -78,14 +78,23 @@ export const metadata: Metadata = {
     title: seo.title,
     description: seo.description,
     url: siteUrl,
-    siteName: site.name,
+    siteName: "Billoxi by XLOXI",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Billoxi by XLOXI — Shopify invoice and packing slip app",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: seo.title,
     description: seo.description,
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,

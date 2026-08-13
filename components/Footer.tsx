@@ -5,7 +5,7 @@ import { legal, nav, site } from "@/lib/content";
 export function Footer() {
   return (
     <footer className="border-t border-line bg-ink">
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
         <div>
           <Logo />
           <p className="mt-4 max-w-sm text-sm leading-6 text-muted">
@@ -28,37 +28,14 @@ export function Footer() {
                 </Link>
               </li>
             ))}
-            <li>
-              <Link href="/#how-it-works" className="text-paper/90 hover:text-lime">
-                How it works
-              </Link>
-            </li>
           </ul>
         </div>
 
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">
-            Contact
+            Get the app
           </p>
           <ul className="mt-4 space-y-2.5 text-sm">
-            <li>
-              <a
-                href={`mailto:${site.email}`}
-                className="text-paper/90 hover:text-lime"
-              >
-                {site.email}
-              </a>
-            </li>
-            <li>
-              <a
-                href={site.websiteUrl}
-                className="text-paper/90 hover:text-lime"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {site.websiteLabel}
-              </a>
-            </li>
             <li>
               <a
                 href={site.appStoreUrl}
@@ -66,8 +43,23 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                apps.shopify.com/billoxi
+                Shopify App Store
               </a>
+            </li>
+            <li>
+              <Link href="/#how-it-works" className="text-paper/90 hover:text-lime">
+                How it works
+              </Link>
+            </li>
+            <li>
+              <Link href="/pricing" className="text-paper/90 hover:text-lime">
+                Plans & pricing
+              </Link>
+            </li>
+            <li>
+              <Link href="/templates" className="text-paper/90 hover:text-lime">
+                Document templates
+              </Link>
             </li>
           </ul>
         </div>
@@ -84,6 +76,11 @@ export function Footer() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href="/faq" className="text-paper/90 hover:text-lime">
+                FAQ
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
@@ -92,14 +89,14 @@ export function Footer() {
         <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8">
           <p>
             © {new Date().getFullYear()} {site.company}. Billoxi is a Shopify
-            app. Powered by XLOXI PVT LTD
+            app. Powered by {site.legalName}
           </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/terms" className="hover:text-lime">
-              Terms of Service
+              Terms
             </Link>
             <Link href="/privacy" className="hover:text-lime">
-              Privacy Policy
+              Privacy
             </Link>
           </div>
         </div>

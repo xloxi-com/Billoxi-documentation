@@ -1,10 +1,10 @@
 # Billoxi
 
-Public website for [Billoxi](https://www.billoxi.xloxi.com), the Shopify invoices and receipts app by XLOXI.
+Public website for [Billoxi](https://www.xloxi.com), the Shopify invoices and receipts app by XLOXI.
 
 - App: [apps.shopify.com/billoxi](https://apps.shopify.com/billoxi)
 - Email: billoxi@xloxi.com
-- Web: [www.billoxi.xloxi.com](https://www.billoxi.xloxi.com)
+- Web: [www.xloxi.com](https://www.xloxi.com)
 
 Branded invoices, packing slips, credit notes, drafts, and returns from every Shopify order.
 

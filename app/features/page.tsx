@@ -12,14 +12,16 @@ import { pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
   title: "Shopify Invoice Features",
   description:
-    "Sales orders, invoices, drafts, packing slips, credit notes, and returns for Shopify — plus templates, SMTP email, automation, and Admin extensions.",
+    "Billoxi features for Shopify: sales orders, invoices, drafts, packing slips, credit notes, returns, SMTP email, bulk PDF, automation, and Admin extensions — by XLOXI.",
   path: "/features",
   keywords: [
+    "Billoxi features",
     "Shopify invoice features",
     "packing slip app",
     "credit note Shopify",
     "draft order invoice",
     "Shopify document automation",
+    "XLOXI Billoxi",
   ],
 });
 
@@ -126,6 +128,19 @@ export default function FeaturesPage() {
         title="Everything after checkout, in one document desk."
         body="Billoxi does not change Shopify totals. You brand the paper, convert as the order moves, and print, download, or email."
       />
+
+      <section className="mx-auto max-w-3xl px-5 pb-4 sm:px-8">
+        <p className="text-[15px] leading-8 text-muted">
+          Billoxi is a Shopify invoice and packing slip app by XLOXI. Merchants
+          use it to create branded sales orders, invoices, drafts, packing slips,
+          credit notes, and returns from every Shopify order. Search and filter
+          order lists, convert documents as payment and fulfillment change, then
+          print, download a PDF, or send email through your SMTP server. Premium
+          plans add automation, bulk ZIP downloads, multi-currency, and email
+          templates. Ultimate adds customer download links and Shopify Admin
+          extensions.
+        </p>
+      </section>
 
       <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
         <h2 className="font-display text-3xl font-semibold tracking-tight">

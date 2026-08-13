@@ -10,7 +10,7 @@ import { termsIntro, termsMeta, termsSections } from "@/lib/terms";
 export const metadata: Metadata = pageMeta({
   title: "Terms of Service",
   description:
-    "Terms of Service for Billoxi, the Shopify invoices and receipts app by XLOXI. Effective 13 August 2026.",
+    "Terms of Service for Billoxi on www.xloxi.com — Shopify invoices and receipts app by XLOXI PVT LTD. Effective 13 August 2026.",
   path: "/terms",
   keywords: [
     "Billoxi terms of service",

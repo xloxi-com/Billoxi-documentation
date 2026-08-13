@@ -9,6 +9,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { PricingToggle } from "@/components/PricingToggle";
 import { sisterApps, techStack } from "@/lib/content";
 import { faqJsonLd, pageMeta, seo, softwareJsonLd } from "@/lib/seo";
+import { SeoGuide, SeoUseCases } from "@/components/home/SeoContent";
 import Link from "next/link";
 
 const homeMeta = pageMeta({
@@ -38,6 +39,8 @@ export default function Home() {
       <HowItWorks />
       <DocumentTypes />
       <FeatureGrid />
+      <SeoUseCases />
+      <SeoGuide />
 
       <section className="border-y border-line bg-card/40">
         <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">

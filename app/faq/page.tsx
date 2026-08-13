@@ -9,10 +9,11 @@ import { faqJsonLd, pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
   title: "FAQ",
   description:
-    "Billoxi FAQ: Shopify totals stay in the order, email needs SMTP, and SKU or barcode print as text — not QR images.",
+    "Billoxi by XLOXI FAQ: Shopify totals stay in the order, email needs SMTP, and SKU or barcode print as text — not QR images.",
   path: "/faq",
   keywords: [
     "Billoxi FAQ",
+    "XLOXI Billoxi help",
     "Shopify invoice SMTP",
     "Shopify packing slip PDF",
   ],

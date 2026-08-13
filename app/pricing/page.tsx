@@ -8,10 +8,11 @@ import { pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
   title: "Pricing",
   description:
-    "Billoxi plans for Shopify: Starter $9.99, Premium $19.99, Ultimate $39 per month. Yearly 20% off. 7-day trial on paid plans.",
+    "Billoxi by XLOXI pricing for Shopify: Starter $9.99, Premium $19.99, Ultimate $39 per month. Yearly 20% off. 7-day trial on paid plans.",
   path: "/pricing",
   keywords: [
     "Billoxi pricing",
+    "XLOXI Billoxi plans",
     "Shopify invoice app price",
     "packing slip app cost",
   ],
@@ -49,6 +50,22 @@ export default function PricingPage() {
 
       <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
         <PricingToggle />
+      </section>
+
+      <section className="mx-auto max-w-3xl px-5 pb-4 sm:px-8">
+        <h2 className="font-display text-2xl font-semibold tracking-tight">
+          Which Billoxi plan fits your Shopify store?
+        </h2>
+        <p className="mt-4 text-[15px] leading-8 text-muted">
+          Starter is for shops that need branded invoices, packing slips, and
+          credit notes with print and PDF. Premium adds SMTP email, email
+          templates, bulk convert and ZIP download, auto invoice on paid, auto
+          credit note on cancel or refund, multi-currency, and the 14-day
+          dashboard chart. Ultimate removes the monthly order cap and adds
+          customer PDF links for Shopify notification emails, Admin order /
+          draft extensions, activity log, and priority support. Yearly billing
+          saves 20% on every paid plan.
+        </p>
       </section>
 
       <section className="border-y border-line bg-card/30">

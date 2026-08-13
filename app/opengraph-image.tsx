@@ -85,7 +85,7 @@ export default function Image() {
             color: "#9A9A90",
           }}
         >
-          Invoices · Packing slips · Credit notes · by XLOXI
+          Invoices · Packing slips · Credit notes · www.xloxi.com
         </div>
       </div>
     ),

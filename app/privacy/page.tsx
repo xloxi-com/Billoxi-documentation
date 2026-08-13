@@ -10,7 +10,7 @@ import { privacyIntro, privacyMeta, privacySections } from "@/lib/privacy";
 export const metadata: Metadata = pageMeta({
   title: "Privacy Policy",
   description:
-    "Privacy Policy for Billoxi by XLOXI. How we collect, use, store, and share Shopify store and order data. Effective 13 August 2026.",
+    "Privacy Policy for Billoxi on www.xloxi.com by XLOXI PVT LTD. How we collect, use, store, and share Shopify store and order data. Effective 13 August 2026.",
   path: "/privacy",
   keywords: [
     "Billoxi privacy policy",

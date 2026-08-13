@@ -9,13 +9,15 @@ import { pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
   title: "Shopify Invoice Templates",
   description:
-    "15 branded invoice and packing slip layouts for Shopify. Edit language, paper size, logo, fonts, tax layout, and totals.",
+    "15 Billoxi invoice and packing slip templates for Shopify by XLOXI. Customize logo, colors, fonts, paper size, language, tax layout, and totals.",
   path: "/templates",
   keywords: [
+    "Billoxi templates",
     "Shopify invoice templates",
     "packing slip templates",
     "branded invoice PDF",
     "invoice layout editor",
+    "XLOXI",
   ],
 });
 
@@ -31,6 +33,28 @@ export default function TemplatesPage() {
 
       <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
         <TemplateGallery />
+      </section>
+
+      <section className="mx-auto max-w-3xl px-5 pb-8 sm:px-8">
+        <h2 className="font-display text-2xl font-semibold tracking-tight">
+          Shopify invoice templates you can brand
+        </h2>
+        <p className="mt-4 text-[15px] leading-8 text-muted">
+          Billoxi includes fifteen layout presets for sales orders, invoices,
+          drafts, returns, and credit notes — and fifteen packing-slip layouts
+          for fulfillment. Every paid plan unlocks the full editor: store logo
+          from Settings, paper size (A5, A4, Letter), portrait or landscape,
+          margins, currency symbol or ISO code, tax summary, payment-status
+          styles, product images, metafield columns, and 104 document label
+          languages. SKU and barcode print as text from the Shopify variant —
+          Billoxi does not generate QR codes or barcode images.
+        </p>
+        <p className="mt-4 text-[15px] leading-8 text-muted">
+          After you pick a template, use it across the document desk for print,
+          PDF download, and SMTP email. Admin language for menus is separate
+          from PDF label language, so your team can work in one language while
+          customer documents ship in another.
+        </p>
       </section>
 
       <section className="border-y border-line bg-card/30">

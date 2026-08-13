@@ -2,24 +2,40 @@ import type { Metadata } from "next";
 import { faqs, plans, site } from "@/lib/content";
 
 export const siteUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://www.billoxi.xloxi.com"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.xloxi.com"
 ).replace(/\/$/, "");
 
 export const seo = {
-  title: "Billoxi | Shopify Invoice & Packing Slip App",
+  title: "Billoxi by XLOXI | Shopify Invoice, Packing Slip & Credit Note App",
   description:
-    "Create branded invoices, packing slips, credit notes, drafts, and returns from every Shopify order. Print, PDF, or email — without retyping.",
+    "Billoxi by XLOXI creates branded Shopify invoices, packing slips, credit notes, drafts, and returns. Print, download PDF, or email from every order — without retyping.",
   keywords: [
+    "Billoxi",
+    "XLOXI",
+    "XLOXI PVT LTD",
     "Shopify invoice app",
     "Shopify packing slip",
     "Shopify credit note",
-    "PDF invoice",
-    "order printer",
+    "PDF invoice Shopify",
+    "order printer Shopify",
     "branded invoices",
     "Shopify order documents",
     "packing slip PDF",
     "invoice templates Shopify",
+    "Shopify draft order invoice",
+    "Shopify return document",
+    "SMTP invoice email Shopify",
+    "B2B Shopify invoice",
+    "Shopify packing slip printer",
+    "auto invoice on paid",
   ],
+};
+
+const defaultOgImage = {
+  url: "/opengraph-image",
+  width: 1200,
+  height: 630,
+  alt: "Billoxi by XLOXI — Shopify invoice and packing slip app",
 };
 
 export function pageMeta({
@@ -34,26 +50,32 @@ export function pageMeta({
   keywords?: string[];
 }): Metadata {
   const url = path === "/" ? siteUrl : `${siteUrl}${path}`;
+  const fullTitle = title.includes("Billoxi") ? title : `${title} | Billoxi by XLOXI`;
 
   return {
     title,
     description,
     keywords,
+    authors: [{ name: site.company, url: siteUrl }],
+    creator: site.company,
+    publisher: site.company,
     alternates: {
-      canonical: path,
+      canonical: url,
     },
     openGraph: {
-      title: `${title} · Billoxi`,
+      title: fullTitle,
       description,
       url,
       type: "website",
       locale: "en_US",
-      siteName: site.name,
+      siteName: "Billoxi by XLOXI",
+      images: [defaultOgImage],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} · Billoxi`,
+      title: fullTitle,
       description,
+      images: [defaultOgImage.url],
     },
     robots: {
       index: true,
@@ -73,14 +95,25 @@ export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: site.company,
+    name: site.legalName,
+    legalName: site.legalName,
+    alternateName: ["XLOXI", "Billoxi"],
     url: siteUrl,
+    email: site.email,
     logo: `${siteUrl}/favicon-512x512.png`,
     image: `${siteUrl}/favicon-512x512.png`,
     brand: {
       "@type": "Brand",
       name: site.name,
       logo: `${siteUrl}/favicon-512x512.png`,
+      url: siteUrl,
+    },
+    sameAs: [site.appStoreUrl, site.websiteUrl],
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: site.email,
+      contactType: "customer support",
+      url: siteUrl,
     },
     description: site.oneLiner,
   };
@@ -90,12 +123,14 @@ export function websiteJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: site.name,
+    name: "Billoxi",
+    alternateName: "Billoxi by XLOXI",
     url: siteUrl,
     description: seo.description,
     publisher: {
       "@type": "Organization",
-      name: site.company,
+      name: "XLOXI PVT LTD",
+      url: siteUrl,
       logo: {
         "@type": "ImageObject",
         url: `${siteUrl}/favicon-512x512.png`,
@@ -109,27 +144,34 @@ export function softwareJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: site.name,
+    name: "Billoxi",
+    alternateName: "Billoxi by XLOXI",
     applicationCategory: "BusinessApplication",
     applicationSubCategory: "Invoices and receipts",
     operatingSystem: "Web",
     url: siteUrl,
+    downloadUrl: site.appStoreUrl,
+    installUrl: site.appStoreUrl,
+    image: `${siteUrl}/favicon-512x512.png`,
     description: seo.description,
     offers: plans.map((plan) => ({
       "@type": "Offer",
       name: plan.name,
-      price: plan.monthly,
+      price: String(plan.monthly),
       priceCurrency: "USD",
+      url: `${siteUrl}/pricing`,
+      availability: "https://schema.org/InStock",
       priceSpecification: {
         "@type": "UnitPriceSpecification",
-        price: plan.monthly,
+        price: String(plan.monthly),
         priceCurrency: "USD",
-        unitText: "MONTH",
+        billingDuration: "P1M",
       },
     })),
     publisher: {
       "@type": "Organization",
-      name: site.company,
+      name: "XLOXI PVT LTD",
+      url: siteUrl,
     },
     featureList: [
       "Shopify invoices",
@@ -139,6 +181,8 @@ export function softwareJsonLd() {
       "Returns",
       "PDF download",
       "SMTP email",
+      "Document templates",
+      "Shopify Admin extensions",
     ],
   };
 }
