@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { faqs, plans, site } from "@/lib/content";
 
 export const siteUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://billoxi-app.xloxi.com"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.billoxi.xloxi.com"
 ).replace(/\/$/, "");
 
 export const seo = {

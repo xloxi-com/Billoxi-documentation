@@ -1,7 +1,11 @@
 export const site = {
   name: "Billoxi",
   company: "XLOXI",
-  appUrl: "https://billoxi-app.xloxi.com",
+  email: "billoxi@xloxi.com",
+  websiteUrl: "https://www.billoxi.xloxi.com",
+  websiteLabel: "www.billoxi.xloxi.com",
+  appStoreUrl: "https://apps.shopify.com/billoxi",
+  appUrl: "https://apps.shopify.com/billoxi",
   category: "Orders and shipping → Orders → Invoices and receipts",
   tagline: "Order documents, without the busywork.",
   oneLiner:
@@ -17,6 +21,11 @@ export const nav = [
   { href: "/templates", label: "Templates" },
   { href: "/pricing", label: "Pricing" },
   { href: "/faq", label: "FAQ" },
+];
+
+export const legal = [
+  { href: "/terms", label: "Terms of Service" },
+  { href: "/privacy", label: "Privacy Policy" },
 ];
 
 export const documentTypes = [
