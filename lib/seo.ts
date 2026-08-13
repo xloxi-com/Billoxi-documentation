@@ -75,9 +75,12 @@ export function organizationJsonLd() {
     "@type": "Organization",
     name: site.company,
     url: siteUrl,
+    logo: `${siteUrl}/favicon-512x512.png`,
+    image: `${siteUrl}/favicon-512x512.png`,
     brand: {
       "@type": "Brand",
       name: site.name,
+      logo: `${siteUrl}/favicon-512x512.png`,
     },
     description: site.oneLiner,
   };
@@ -93,6 +96,10 @@ export function websiteJsonLd() {
     publisher: {
       "@type": "Organization",
       name: site.company,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/favicon-512x512.png`,
+      },
     },
     inLanguage: "en",
   };
