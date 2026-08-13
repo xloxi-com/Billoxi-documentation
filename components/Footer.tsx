@@ -90,7 +90,10 @@ export function Footer() {
 
       <div className="border-t border-line">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8">
-          <p>© {new Date().getFullYear()} {site.company}. Billoxi is a Shopify app.</p>
+          <p>
+            © {new Date().getFullYear()} {site.company}. Billoxi is a Shopify
+            app. Powered by XLOXI PVT LTD
+          </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/terms" className="hover:text-lime">
               Terms of Service
