@@ -1,17 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { templateLayouts } from "@/lib/content";
+import { templateCategories, templateLayouts } from "@/lib/content";
 
-const types = [
-  { id: "standard", label: "Sales / Invoice / Draft / Return / Credit" },
-  { id: "packing", label: "Packing slip" },
-] as const;
+type LayoutKey = (typeof templateCategories)[number]["layoutKey"];
 
-type DocType = (typeof types)[number]["id"];
+type CategoryId = (typeof templateCategories)[number]["id"];
 
 type SelectedTemplate = {
-  type: DocType;
+  categoryId: string;
+  layoutKey: LayoutKey;
   name: string;
   index: number;
 };
@@ -20,31 +18,31 @@ function slug(name: string) {
   return name.toLowerCase().replace(/\s+/g, "-");
 }
 
-function imageCandidates(type: string, name: string, index: number) {
+function imageCandidates(layoutKey: LayoutKey, name: string, index: number) {
   const nn = String(index + 1).padStart(2, "0");
   return [
-    `/templates/${type}/${nn}.png`,
-    `/templates/${type}/${nn}.jpg`,
-    `/templates/${type}/${nn}.webp`,
-    `/templates/${type}/${slug(name)}.png`,
-    `/templates/${type}/${slug(name)}.jpg`,
+    `/templates/${layoutKey}/${nn}.png`,
+    `/templates/${layoutKey}/${nn}.jpg`,
+    `/templates/${layoutKey}/${nn}.webp`,
+    `/templates/${layoutKey}/${slug(name)}.png`,
+    `/templates/${layoutKey}/${slug(name)}.jpg`,
   ];
 }
 
 function TemplateImage({
-  type,
+  layoutKey,
   name,
   index,
   className,
   variant = "thumbnail",
 }: {
-  type: string;
+  layoutKey: LayoutKey;
   name: string;
   index: number;
   className?: string;
   variant?: "thumbnail" | "full";
 }) {
-  const candidates = imageCandidates(type, name, index);
+  const candidates = imageCandidates(layoutKey, name, index);
   const [srcIndex, setSrcIndex] = useState(0);
   const src = candidates[srcIndex];
 
@@ -95,11 +93,11 @@ function clampZoom(value: number) {
 }
 
 function TemplatePreviewViewer({
-  type,
+  layoutKey,
   name,
   index,
 }: {
-  type: string;
+  layoutKey: LayoutKey;
   name: string;
   index: number;
 }) {
@@ -113,7 +111,7 @@ function TemplatePreviewViewer({
   useEffect(() => {
     setZoom(1);
     setPan({ x: 0, y: 0 });
-  }, [type, name, index]);
+  }, [layoutKey, name, index]);
 
   useEffect(() => {
     const viewport = viewportRef.current;
@@ -226,8 +224,8 @@ function TemplatePreviewViewer({
             }}
           >
             <TemplateImage
-              key={`${type}-${name}-${index}`}
-              type={type}
+              key={`${layoutKey}-${name}-${index}`}
+              layoutKey={layoutKey}
               name={name}
               index={index}
               variant="full"
@@ -286,7 +284,7 @@ function TemplateLightbox({
   onClose: () => void;
   onNavigate: (index: number) => void;
 }) {
-  const { type, name, index } = selected;
+  const { layoutKey, name, index } = selected;
   const hasPrev = index > 0;
   const hasNext = index < layouts.length - 1;
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -322,7 +320,7 @@ function TemplateLightbox({
       ref={dialogRef}
       onClose={onClose}
       aria-label={`${name} template preview`}
-      className="fixed inset-0 z-[9999] m-0 h-full max-h-none w-full max-w-none border-0 bg-ink/95 p-0 backdrop:bg-ink/90"
+      className="fixed inset-0 z-9999 m-0 h-full max-h-none w-full max-w-none border-0 bg-ink/95 p-0 backdrop:bg-ink/90"
     >
       <div className="relative h-full w-full">
         <button
@@ -334,20 +332,32 @@ function TemplateLightbox({
           ×
         </button>
 
-        <TemplatePreviewViewer type={type} name={name} index={index} />
+        <TemplatePreviewViewer layoutKey={layoutKey} name={name} index={index} />
       </div>
     </dialog>
   );
 }
 
 export function TemplateGallery() {
-  const [type, setType] = useState<DocType>("standard");
+  const [categoryId, setCategoryId] = useState<CategoryId>("sales-order");
   const [selected, setSelected] = useState<SelectedTemplate | null>(null);
-  const layouts = templateLayouts[type];
 
-  const openPreview = useCallback((name: string, index: number) => {
-    setSelected({ type, name, index });
-  }, [type]);
+  const activeCategory =
+    templateCategories.find((item) => item.id === categoryId) ??
+    templateCategories[0];
+  const layouts = templateLayouts[activeCategory.layoutKey];
+
+  const openPreview = useCallback(
+    (name: string, index: number) => {
+      setSelected({
+        categoryId: activeCategory.id,
+        layoutKey: activeCategory.layoutKey,
+        name,
+        index,
+      });
+    },
+    [activeCategory],
+  );
 
   const closePreview = useCallback(() => {
     setSelected(null);
@@ -356,25 +366,32 @@ export function TemplateGallery() {
   const navigatePreview = useCallback(
     (index: number) => {
       const name = layouts[index];
-      if (name) setSelected({ type, name, index });
+      if (name) {
+        setSelected({
+          categoryId: activeCategory.id,
+          layoutKey: activeCategory.layoutKey,
+          name,
+          index,
+        });
+      }
     },
-    [type, layouts],
+    [activeCategory, layouts],
   );
 
   useEffect(() => {
     setSelected(null);
-  }, [type]);
+  }, [categoryId]);
 
   return (
     <div>
       <div className="flex flex-wrap gap-2">
-        {types.map((item) => (
+        {templateCategories.map((item) => (
           <button
             key={item.id}
             type="button"
-            onClick={() => setType(item.id)}
+            onClick={() => setCategoryId(item.id)}
             className={`rounded-full px-4 py-2 text-sm ${
-              type === item.id
+              categoryId === item.id
                 ? "bg-lime text-ink"
                 : "border border-line text-muted hover:text-paper"
             }`}
@@ -385,39 +402,43 @@ export function TemplateGallery() {
       </div>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {layouts.map((name, index) => (
-          <article
-            key={`${type}-${name}`}
-            className="overflow-hidden rounded-2xl border border-line bg-card transition hover:border-lime/40"
-          >
-            <button
-              type="button"
-              aria-label={`View full ${name} template preview`}
-              onClick={() => openPreview(name, index)}
-              className="group relative block w-full cursor-pointer text-left"
+          {layouts.map((name, index) => (
+            <article
+              key={`${categoryId}-${name}`}
+              className="overflow-hidden rounded-2xl border border-line bg-card transition hover:border-lime/40"
             >
-              <div className="relative aspect-3/4 bg-soft">
-                <TemplateImage type={type} name={name} index={index} />
-                <span className="pointer-events-none absolute inset-0 flex items-end justify-center bg-linear-to-t from-ink/70 via-ink/10 to-transparent pb-5 opacity-100 transition group-hover:from-ink/80">
-                  <span className="rounded-full bg-lime px-4 py-2 text-sm font-medium text-ink shadow-lg">
-                    View full preview
+              <button
+                type="button"
+                aria-label={`View full ${name} template preview`}
+                onClick={() => openPreview(name, index)}
+                className="group relative block w-full cursor-pointer text-left"
+              >
+                <div className="relative aspect-3/4 bg-soft">
+                  <TemplateImage
+                    layoutKey={activeCategory.layoutKey}
+                    name={name}
+                    index={index}
+                  />
+                  <span className="pointer-events-none absolute inset-0 flex items-end justify-center bg-linear-to-t from-ink/70 via-ink/10 to-transparent pb-5 opacity-0 transition duration-200 group-hover:opacity-100 group-hover:from-ink/80 group-focus-visible:opacity-100">
+                    <span className="rounded-full bg-lime px-4 py-2 text-sm font-medium text-ink shadow-lg">
+                      View full preview
+                    </span>
                   </span>
-                </span>
-              </div>
-              <div className="flex items-center justify-between px-4 py-3">
-                <p className="text-sm font-medium">{name}</p>
-                <p className="text-xs text-muted">
-                  {String(index + 1).padStart(2, "0")} / 15
-                </p>
-              </div>
-            </button>
-          </article>
+                </div>
+                <div className="flex items-center justify-between px-4 py-3">
+                  <p className="text-sm font-medium">{name}</p>
+                  <p className="text-xs text-muted">
+                    {String(index + 1).padStart(2, "0")} / 15
+                  </p>
+                </div>
+              </button>
+            </article>
         ))}
       </div>
 
       {selected ? (
         <TemplateLightbox
-          key={`${selected.type}-${selected.name}-${selected.index}`}
+          key={`${selected.categoryId}-${selected.name}-${selected.index}`}
           selected={selected}
           layouts={layouts}
           onClose={closePreview}

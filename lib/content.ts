@@ -178,6 +178,23 @@ export const listingFeatures = [
 
 export const templateLayouts = {
   standard: [
+    "Professional",
+    "Modern",
+    "European",
+    "Classic",
+    "Compact",
+    "Minimal",
+    "Standard",
+    "Bold",
+    "Studio",
+    "Horizon",
+    "Ledger",
+    "Folio",
+    "Spectrum",
+    "Apex",
+    "Japanese",
+  ],
+  "sales-order": [
     "Standard",
     "Modern",
     "Classic",
@@ -193,6 +210,57 @@ export const templateLayouts = {
     "Folio",
     "Spectrum",
     "Apex",
+  ],
+  draft: [
+    "Professional",
+    "Modern",
+    "European",
+    "Classic",
+    "Compact",
+    "Minimal",
+    "Standard",
+    "Bold",
+    "Studio",
+    "Horizon",
+    "Ledger",
+    "Folio",
+    "Spectrum",
+    "Apex",
+    "Japanese",
+  ],
+  "credit-note": [
+    "Professional",
+    "Modern",
+    "European",
+    "Classic",
+    "Compact",
+    "Minimal",
+    "Standard",
+    "Bold",
+    "Studio",
+    "Horizon",
+    "Ledger",
+    "Folio",
+    "Spectrum",
+    "Simple",
+    "Detailed",
+  ],
+  return: [
+    "Professional",
+    "Modern",
+    "European",
+    "Classic",
+    "Compact",
+    "Minimal",
+    "Standard",
+    "Bold",
+    "Studio",
+    "Horizon",
+    "Ledger",
+    "Folio",
+    "Spectrum",
+    "Apex",
+    "Japanese",
   ],
   packing: [
     "Standard",
@@ -212,6 +280,17 @@ export const templateLayouts = {
     "Fulfillment",
   ],
 };
+
+export const templateCategories = [
+  { id: "sales-order", label: "Sales", layoutKey: "sales-order" as const },
+  { id: "invoice", label: "Invoice", layoutKey: "standard" as const },
+  { id: "draft", label: "Draft", layoutKey: "draft" as const },
+  { id: "return", label: "Return", layoutKey: "return" as const },
+  { id: "credit-note", label: "Credit", layoutKey: "credit-note" as const },
+  { id: "packing-slip", label: "Packing slip", layoutKey: "packing" as const },
+] as const;
+
+export type TemplateLayoutKey = keyof typeof templateLayouts;
 
 export const editorHighlights = [
   {
