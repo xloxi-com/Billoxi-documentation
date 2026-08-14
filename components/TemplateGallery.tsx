@@ -78,7 +78,7 @@ function TemplateImage({
       draggable={false}
       className={
         variant === "full"
-          ? `block h-auto max-h-[calc(100dvh-10.5rem)] w-auto max-w-[min(920px,calc(100vw-2rem))] select-none ${className ?? ""}`
+          ? `block h-auto max-h-[calc(100dvh-4rem)] w-auto max-w-[min(calc(100vw-2rem),920px)] select-none ${className ?? ""}`
           : `pointer-events-none h-full w-full object-cover object-top ${className ?? ""}`
       }
       onError={() => setSrcIndex((i) => i + 1)}
@@ -205,42 +205,10 @@ function TemplatePreviewViewer({
   };
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col">
-      <div className="flex shrink-0 items-center justify-center gap-2 border-b border-line bg-ink px-4 py-2.5">
-        <button
-          type="button"
-          onClick={zoomOut}
-          disabled={zoom <= ZOOM_MIN}
-          aria-label="Zoom out"
-          className="grid size-9 place-items-center rounded-full border border-line text-lg text-paper transition enabled:hover:border-lime disabled:opacity-40"
-        >
-          −
-        </button>
-        <span className="min-w-14 text-center text-sm text-muted">
-          {Math.round(zoom * 100)}%
-        </span>
-        <button
-          type="button"
-          onClick={zoomIn}
-          disabled={zoom >= ZOOM_MAX}
-          aria-label="Zoom in"
-          className="grid size-9 place-items-center rounded-full border border-line text-lg text-paper transition enabled:hover:border-lime disabled:opacity-40"
-        >
-          +
-        </button>
-        <button
-          type="button"
-          onClick={resetView}
-          disabled={zoom === 1 && pan.x === 0 && pan.y === 0}
-          className="rounded-full border border-line px-3 py-1.5 text-xs text-muted transition enabled:hover:border-lime enabled:hover:text-paper disabled:opacity-40"
-        >
-          Fit to screen
-        </button>
-      </div>
-
+    <div className="relative h-full w-full">
       <div
         ref={viewportRef}
-        className={`relative min-h-0 flex-1 touch-none overflow-hidden bg-soft/40 ${zoom > 1 ? (dragging ? "cursor-grabbing" : "cursor-grab") : "cursor-zoom-in"}`}
+        className={`h-full w-full touch-none overflow-hidden ${zoom > 1 ? (dragging ? "cursor-grabbing" : "cursor-grab") : "cursor-zoom-in"}`}
         onDoubleClick={handleDoubleClick}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
@@ -250,7 +218,7 @@ function TemplatePreviewViewer({
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="flex h-full w-full items-center justify-center p-3 sm:p-6">
+        <div className="flex h-full w-full items-center justify-center p-2 sm:p-4">
           <div
             className={dragging ? "" : "transition-transform duration-150 ease-out"}
             style={{
@@ -263,15 +231,46 @@ function TemplatePreviewViewer({
               name={name}
               index={index}
               variant="full"
-              className="rounded-lg border border-line bg-paper shadow-2xl"
+              className="rounded-md border border-line/50 bg-paper shadow-2xl"
             />
           </div>
         </div>
       </div>
 
-      <p className="shrink-0 px-4 py-2 text-center text-xs text-muted">
-        Scroll wheel or pinch to zoom · Double-click to zoom · Drag when zoomed in
-      </p>
+      <div className="pointer-events-none absolute inset-x-0 bottom-4 z-20 flex justify-center px-4">
+        <div className="pointer-events-auto flex items-center gap-1.5 rounded-full border border-line/80 bg-ink/90 px-2 py-1.5 shadow-lg backdrop-blur-sm">
+          <button
+            type="button"
+            onClick={zoomOut}
+            disabled={zoom <= ZOOM_MIN}
+            aria-label="Zoom out"
+            className="grid size-8 place-items-center rounded-full text-lg text-paper transition enabled:hover:bg-soft disabled:opacity-40"
+          >
+            −
+          </button>
+          <span className="min-w-12 text-center text-xs text-muted">
+            {Math.round(zoom * 100)}%
+          </span>
+          <button
+            type="button"
+            onClick={zoomIn}
+            disabled={zoom >= ZOOM_MAX}
+            aria-label="Zoom in"
+            className="grid size-8 place-items-center rounded-full text-lg text-paper transition enabled:hover:bg-soft disabled:opacity-40"
+          >
+            +
+          </button>
+          <span className="mx-0.5 h-5 w-px bg-line" />
+          <button
+            type="button"
+            onClick={resetView}
+            disabled={zoom === 1 && pan.x === 0 && pan.y === 0}
+            className="rounded-full px-3 py-1.5 text-xs text-muted transition enabled:hover:bg-soft enabled:hover:text-paper disabled:opacity-40"
+          >
+            Fit
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -322,48 +321,21 @@ function TemplateLightbox({
     <dialog
       ref={dialogRef}
       onClose={onClose}
-      className="fixed inset-0 z-[9999] m-0 h-full max-h-none w-full max-w-none border-0 bg-ink/95 p-0 backdrop:bg-ink/80 open:flex open:flex-col"
+      aria-label={`${name} template preview`}
+      className="fixed inset-0 z-[9999] m-0 h-full max-h-none w-full max-w-none border-0 bg-ink/95 p-0 backdrop:bg-ink/90"
     >
-      <div className="flex shrink-0 items-center justify-between gap-4 border-b border-line bg-ink px-4 py-3 sm:px-6">
-        <div>
-          <p className="text-lg font-medium text-paper sm:text-xl">{name}</p>
-          <p className="text-xs text-muted sm:text-sm">
-            {String(index + 1).padStart(2, "0")} /{" "}
-            {String(layouts.length).padStart(2, "0")}
-          </p>
-        </div>
+      <div className="relative h-full w-full">
         <button
           type="button"
           onClick={() => dialogRef.current?.close()}
-          className="rounded-full border border-line px-4 py-2 text-sm text-muted transition hover:border-lime hover:text-paper"
+          aria-label="Close preview"
+          className="absolute right-3 top-3 z-30 grid size-10 place-items-center rounded-full border border-line/80 bg-ink/90 text-xl text-paper shadow-lg backdrop-blur-sm transition hover:border-lime hover:text-lime sm:right-5 sm:top-5"
         >
-          Close
+          ×
         </button>
+
+        <TemplatePreviewViewer type={type} name={name} index={index} />
       </div>
-
-      <TemplatePreviewViewer type={type} name={name} index={index} />
-
-      {layouts.length > 1 ? (
-        <div className="flex shrink-0 items-center justify-between gap-3 border-t border-line bg-ink px-4 py-3 sm:px-6">
-          <button
-            type="button"
-            disabled={!hasPrev}
-            onClick={() => onNavigate(index - 1)}
-            className="rounded-full border border-line px-4 py-2 text-sm text-muted transition enabled:hover:border-lime enabled:hover:text-paper disabled:opacity-40"
-          >
-            Previous
-          </button>
-          <p className="text-xs text-muted sm:text-sm">Switch template</p>
-          <button
-            type="button"
-            disabled={!hasNext}
-            onClick={() => onNavigate(index + 1)}
-            className="rounded-full border border-line px-4 py-2 text-sm text-muted transition enabled:hover:border-lime enabled:hover:text-paper disabled:opacity-40"
-          >
-            Next
-          </button>
-        </div>
-      ) : null}
     </dialog>
   );
 }
