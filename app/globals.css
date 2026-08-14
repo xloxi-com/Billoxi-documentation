@@ -128,3 +128,11 @@ body {
 .float-slow {
   animation: float-slow 8s ease-in-out infinite;
 }
+
+dialog::backdrop {
+  background: rgb(25 25 25 / 0.92);
+}
+
+dialog[open] {
+  display: flex;
+}
