@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { seoGuide, seoKeywordsBlock, seoUseCases } from "@/lib/content";
+import { seoLandingPages } from "@/lib/seo-pages";
 
 export function SeoGuide() {
   return (
@@ -37,6 +38,18 @@ export function SeoGuide() {
           ))}
         </div>
 
+        <div className="mt-8 flex flex-wrap gap-3">
+          {seoLandingPages.map((page) => (
+            <Link
+              key={page.path}
+              href={page.path}
+              className="rounded-full border border-line px-3.5 py-2 text-xs text-paper/90 hover:border-lime/50 hover:text-lime"
+            >
+              {page.navLabel}
+            </Link>
+          ))}
+        </div>
+
         <p className="mt-8 text-sm text-muted">
           Explore{" "}
           <Link href="/features" className="text-lime hover:underline">
@@ -46,11 +59,19 @@ export function SeoGuide() {
           <Link href="/templates" className="text-lime hover:underline">
             invoice templates
           </Link>
-          , and{" "}
+          ,{" "}
           <Link href="/pricing" className="text-lime hover:underline">
             pricing
+          </Link>
+          , and the{" "}
+          <Link href="/blog" className="text-lime hover:underline">
+            Billoxi blog
           </Link>{" "}
-          — or open Billoxi on the{" "}
+          — or open{" "}
+          <Link href="/smart-invoice-pdf" className="text-lime hover:underline">
+            Billoxi: Smart Invoice PDF
+          </Link>{" "}
+          on the{" "}
           <a
             href="https://apps.shopify.com/billoxi"
             className="text-lime hover:underline"

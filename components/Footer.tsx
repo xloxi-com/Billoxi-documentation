@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { legal, nav, site } from "@/lib/content";
+import { seoLandingPages } from "@/lib/seo-pages";
 
 export function Footer() {
   return (
@@ -9,10 +10,10 @@ export function Footer() {
         <div>
           <Logo />
           <p className="mt-4 max-w-sm text-sm leading-6 text-muted">
-            {site.oneLiner}
+            {site.listingName}. {site.oneLiner}
           </p>
           <p className="mt-3 text-xs uppercase tracking-[0.16em] text-muted">
-            By {site.company}
+            By {site.legalName}
           </p>
         </div>
 
@@ -61,14 +62,34 @@ export function Footer() {
                 Document templates
               </Link>
             </li>
+            <li>
+              <Link href="/blog" className="text-paper/90 hover:text-lime">
+                Blog & guides
+              </Link>
+            </li>
+            <li>
+              <a
+                href="/rss.xml"
+                className="text-paper/90 hover:text-lime"
+              >
+                RSS feed
+              </a>
+            </li>
           </ul>
         </div>
 
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">
-            Legal
+            Solutions
           </p>
           <ul className="mt-4 space-y-2.5 text-sm">
+            {seoLandingPages.map((page) => (
+              <li key={page.path}>
+                <Link href={page.path} className="text-paper/90 hover:text-lime">
+                  {page.navLabel}
+                </Link>
+              </li>
+            ))}
             {legal.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className="text-paper/90 hover:text-lime">
@@ -76,11 +97,6 @@ export function Footer() {
                 </Link>
               </li>
             ))}
-            <li>
-              <Link href="/faq" className="text-paper/90 hover:text-lime">
-                FAQ
-              </Link>
-            </li>
           </ul>
         </div>
       </div>
@@ -88,8 +104,8 @@ export function Footer() {
       <div className="border-t border-line">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8">
           <p>
-            © {new Date().getFullYear()} {site.company}. Billoxi is a Shopify
-            app. Powered by {site.legalName}
+            © {new Date().getFullYear()} {site.legalName}. {site.listingName}{" "}
+            is a Shopify app at apps.shopify.com/billoxi.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/terms" className="hover:text-lime">

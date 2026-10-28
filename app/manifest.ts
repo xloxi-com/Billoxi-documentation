@@ -2,10 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Billoxi",
+    name: "Billoxi: Smart Invoice PDF",
     short_name: "Billoxi",
     description:
-      "Branded invoices, packing slips, and credit notes from every Shopify order.",
+      "Billoxi: Smart Invoice PDF by XLOXI — branded invoices, packing slips, and credit notes from every Shopify order.",
     start_url: "/",
     display: "standalone",
     background_color: "#191919",

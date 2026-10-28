@@ -8,6 +8,7 @@ import { FaqList } from "@/components/FaqList";
 import { JsonLd } from "@/components/JsonLd";
 import { PricingToggle } from "@/components/PricingToggle";
 import { sisterApps, techStack } from "@/lib/content";
+import { getAllPosts, postPath } from "@/lib/blog";
 import { faqJsonLd, pageMeta, seo, softwareJsonLd } from "@/lib/seo";
 import { SeoGuide, SeoUseCases } from "@/components/home/SeoContent";
 import Link from "next/link";
@@ -32,6 +33,8 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  const latestPosts = getAllPosts().slice(0, 3);
+
   return (
     <>
       <JsonLd data={[softwareJsonLd(), faqJsonLd()]} />
@@ -41,6 +44,54 @@ export default function Home() {
       <FeatureGrid />
       <SeoUseCases />
       <SeoGuide />
+
+      <section>
+        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-lime">
+                Blog
+              </p>
+              <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+                Learn Billoxi for Shopify.
+              </h2>
+              <p className="mt-3 max-w-xl text-sm leading-7 text-muted">
+                Guides that connect the Billoxi name to invoices, packing slips,
+                credit notes, and the Shopify App Store listing.
+              </p>
+            </div>
+            <Link
+              href="/blog"
+              className="text-sm text-muted transition-colors hover:text-lime"
+            >
+              All posts →
+            </Link>
+          </div>
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {latestPosts.map((post) => (
+              <article
+                key={post.slug}
+                className="rounded-2xl border border-line bg-card p-6"
+              >
+                <p className="text-[11px] uppercase tracking-[0.14em] text-lime">
+                  {post.category}
+                </p>
+                <h3 className="mt-3 font-medium leading-6">
+                  <Link
+                    href={postPath(post.slug)}
+                    className="hover:text-lime"
+                  >
+                    {post.title}
+                  </Link>
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-muted line-clamp-3">
+                  {post.description}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="border-y border-line bg-card/40">
         <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">

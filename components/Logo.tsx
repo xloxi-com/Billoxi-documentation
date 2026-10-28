@@ -11,11 +11,11 @@ export function Logo({ className = "", compact = false }: LogoProps) {
     <Link
       href="/"
       className={`inline-flex items-center gap-2.5 ${className}`}
-      aria-label="Billoxi home"
+      aria-label="Billoxi: Smart Invoice PDF — home"
     >
       <Image
         src="/logo.svg"
-        alt=""
+        alt="Billoxi: Smart Invoice PDF by XLOXI"
         width={32}
         height={32}
         className="size-8 rounded-lg"

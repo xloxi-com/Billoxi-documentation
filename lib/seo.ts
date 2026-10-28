@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { BlogPost } from "@/lib/blog";
 import { faqs, plans, site } from "@/lib/content";
 
 export const siteUrl = (
@@ -6,13 +7,20 @@ export const siteUrl = (
 ).replace(/\/$/, "");
 
 export const seo = {
-  title: "Billoxi by XLOXI | Shopify Invoice, Packing Slip & Credit Note App",
+  title:
+    "Billoxi: Smart Invoice PDF by XLOXI | Shopify Invoice & Packing Slip App",
   description:
-    "Billoxi by XLOXI creates branded Shopify invoices, packing slips, credit notes, drafts, and returns. Print, download PDF, or email from every order — without retyping.",
+    "Billoxi: Smart Invoice PDF by XLOXI creates branded Shopify invoices, packing slips, credit notes, drafts, and returns. Print, download PDF, or email from every order — without retyping.",
   keywords: [
     "Billoxi",
+    "Billoxi: Smart Invoice PDF",
+    "Smart Invoice PDF",
+    "Billoxi Shopify app",
+    "Billoxi by XLOXI",
     "XLOXI",
     "XLOXI PVT LTD",
+    "XLOXI Billoxi",
+    "apps.shopify.com/billoxi",
     "Shopify invoice app",
     "Shopify packing slip",
     "Shopify credit note",
@@ -28,6 +36,8 @@ export const seo = {
     "B2B Shopify invoice",
     "Shopify packing slip printer",
     "auto invoice on paid",
+    "best Shopify invoice app",
+    "Beautiful PDF Templates",
   ],
 };
 
@@ -35,7 +45,7 @@ const defaultOgImage = {
   url: "/opengraph-image",
   width: 1200,
   height: 630,
-  alt: "Billoxi by XLOXI — Shopify invoice and packing slip app",
+  alt: "Billoxi: Smart Invoice PDF by XLOXI — Shopify invoice and packing slip app",
 };
 
 export function pageMeta({
@@ -50,7 +60,9 @@ export function pageMeta({
   keywords?: string[];
 }): Metadata {
   const url = path === "/" ? siteUrl : `${siteUrl}${path}`;
-  const fullTitle = title.includes("Billoxi") ? title : `${title} | Billoxi by XLOXI`;
+  const fullTitle = title.includes("Billoxi")
+    ? title
+    : `${title} | Billoxi: Smart Invoice PDF`;
 
   return {
     title,
@@ -68,7 +80,7 @@ export function pageMeta({
       url,
       type: "website",
       locale: "en_US",
-      siteName: "Billoxi by XLOXI",
+      siteName: "Billoxi: Smart Invoice PDF",
       images: [defaultOgImage],
     },
     twitter: {
@@ -91,24 +103,40 @@ export function pageMeta({
   };
 }
 
+export function faqJsonLdFor(items: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
+}
+
 export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: site.legalName,
     legalName: site.legalName,
-    alternateName: ["XLOXI", "Billoxi"],
+    alternateName: ["XLOXI", "Billoxi", "Billoxi: Smart Invoice PDF"],
     url: siteUrl,
     email: site.email,
     logo: `${siteUrl}/favicon-512x512.png`,
     image: `${siteUrl}/favicon-512x512.png`,
     brand: {
       "@type": "Brand",
-      name: site.name,
+      name: "Billoxi: Smart Invoice PDF",
+      alternateName: ["Billoxi", "Smart Invoice PDF"],
       logo: `${siteUrl}/favicon-512x512.png`,
       url: siteUrl,
     },
-    sameAs: [site.appStoreUrl, site.websiteUrl],
+    sameAs: [site.appStoreUrl],
     contactPoint: {
       "@type": "ContactPoint",
       email: site.email,
@@ -123,8 +151,14 @@ export function websiteJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Billoxi",
-    alternateName: "Billoxi by XLOXI",
+    name: "Billoxi: Smart Invoice PDF",
+    alternateName: [
+      "Billoxi",
+      "Billoxi by XLOXI",
+      "Billoxi Shopify app",
+      "XLOXI Billoxi",
+      "Smart Invoice PDF",
+    ],
     url: siteUrl,
     description: seo.description,
     publisher: {
@@ -144,14 +178,21 @@ export function softwareJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "Billoxi",
-    alternateName: "Billoxi by XLOXI",
+    name: "Billoxi: Smart Invoice PDF",
+    alternateName: [
+      "Billoxi",
+      "Billoxi by XLOXI",
+      "Billoxi Shopify app",
+      "XLOXI Billoxi",
+      "Smart Invoice PDF",
+    ],
     applicationCategory: "BusinessApplication",
     applicationSubCategory: "Invoices and receipts",
     operatingSystem: "Web",
     url: siteUrl,
     downloadUrl: site.appStoreUrl,
     installUrl: site.appStoreUrl,
+    sameAs: [site.appStoreUrl],
     image: `${siteUrl}/favicon-512x512.png`,
     description: seo.description,
     offers: plans.map((plan) => ({
@@ -188,18 +229,7 @@ export function softwareJsonLd() {
 }
 
 export function faqJsonLd() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((item) => ({
-      "@type": "Question",
-      name: item.q,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.a,
-      },
-    })),
-  };
+  return faqJsonLdFor(faqs);
 }
 
 export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
@@ -220,5 +250,72 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
         item: `${siteUrl}${item.path}`,
       })),
     ],
+  };
+}
+
+export function blogListJsonLd(
+  posts: { title: string; slug: string; description: string }[],
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "Billoxi Blog",
+    description:
+      "Guides for Billoxi: Smart Invoice PDF — Shopify invoices, packing slips, credit notes, and order documents.",
+    url: `${siteUrl}/blog`,
+    publisher: {
+      "@type": "Organization",
+      name: site.legalName,
+      url: siteUrl,
+    },
+    blogPost: posts.map((post) => ({
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.description,
+      url: `${siteUrl}/blog/${post.slug}`,
+    })),
+  };
+}
+
+export function articleJsonLd(post: BlogPost) {
+  const url = `${siteUrl}/blog/${post.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url,
+    },
+    url,
+    keywords: post.keywords.join(", "),
+    author: {
+      "@type": "Organization",
+      name: site.legalName,
+      url: siteUrl,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: site.legalName,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/favicon-512x512.png`,
+      },
+    },
+    about: {
+      "@type": "SoftwareApplication",
+      name: "Billoxi",
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      url: site.appStoreUrl,
+    },
+    isPartOf: {
+      "@type": "Blog",
+      name: "Billoxi Blog",
+      url: `${siteUrl}/blog`,
+    },
   };
 }

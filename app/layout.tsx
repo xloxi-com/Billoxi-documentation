@@ -27,16 +27,16 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: seo.title,
-    template: "%s · Billoxi by XLOXI",
+    template: "%s · Billoxi: Smart Invoice PDF",
   },
   description: seo.description,
   keywords: seo.keywords,
-  applicationName: "Billoxi",
+  applicationName: "Billoxi: Smart Invoice PDF",
   authors: [{ name: "XLOXI PVT LTD", url: siteUrl }],
   creator: "XLOXI PVT LTD",
   publisher: "XLOXI PVT LTD",
   category: "technology",
-  classification: "Shopify App — Invoices and receipts",
+  classification: "Shopify App — Invoices and receipts · Smart Invoice PDF",
   referrer: "origin-when-cross-origin",
   formatDetection: {
     email: false,
@@ -45,6 +45,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: siteUrl,
+    types: {
+      "application/rss+xml": `${siteUrl}/rss.xml`,
+    },
   },
   icons: {
     icon: [
@@ -78,7 +81,7 @@ export const metadata: Metadata = {
     title: seo.title,
     description: seo.description,
     url: siteUrl,
-    siteName: "Billoxi by XLOXI",
+    siteName: "Billoxi: Smart Invoice PDF",
     locale: "en_US",
     type: "website",
     images: [
@@ -86,7 +89,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Billoxi by XLOXI — Shopify invoice and packing slip app",
+        alt: "Billoxi: Smart Invoice PDF by XLOXI — Shopify invoice app",
       },
     ],
   },

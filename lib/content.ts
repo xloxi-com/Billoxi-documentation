@@ -1,5 +1,6 @@
 export const site = {
   name: "Billoxi",
+  listingName: "Billoxi: Smart Invoice PDF",
   company: "XLOXI",
   legalName: "XLOXI PVT LTD",
   email: "billoxi@xloxi.com",
@@ -8,19 +9,21 @@ export const site = {
   appStoreUrl: "https://apps.shopify.com/billoxi",
   appUrl: "https://apps.shopify.com/billoxi",
   category: "Orders and shipping → Orders → Invoices and receipts",
-  tagline: "Order documents, without the busywork.",
+  tagline: "Billoxi — smart invoice PDFs from every Shopify order.",
   oneLiner:
     "Branded invoices, packing slips, credit notes, drafts, and returns from every Shopify order.",
   hero:
-    "After checkout, merchants still need paperwork. Billoxi turns the Shopify order into professional documents — print, PDF, or email — without retyping.",
+    "Billoxi: Smart Invoice PDF by XLOXI turns Shopify orders into professional documents — beautiful templates, print, PDF download, or SMTP email — without retyping.",
   listingIntro:
-    "Create branded invoices, packing slips, and credit notes. Look professional and save time per order.",
+    "Create professional invoices, sales orders and credit notes in seconds. Beautiful PDF templates for Shopify.",
+  listingHeadline: "Beautiful PDF Templates",
 };
 
 export const nav = [
   { href: "/features", label: "Features" },
   { href: "/templates", label: "Templates" },
   { href: "/pricing", label: "Pricing" },
+  { href: "/blog", label: "Blog" },
   { href: "/faq", label: "FAQ" },
 ];
 
@@ -399,6 +402,14 @@ export const plans = [
 
 export const faqs = [
   {
+    q: "What is Billoxi?",
+    a: "Billoxi (App Store name: Billoxi: Smart Invoice PDF) is a Shopify app by XLOXI PVT LTD. It creates branded invoices, packing slips, credit notes, drafts, and returns from Shopify orders. Install at apps.shopify.com/billoxi.",
+  },
+  {
+    q: "Where do I install the Billoxi Shopify app?",
+    a: "Search Billoxi on the Shopify App Store, or open https://apps.shopify.com/billoxi. The developer is XLOXI PVT LTD. Product docs and pricing live on www.xloxi.com.",
+  },
+  {
     q: "Does Billoxi change Shopify order totals?",
     a: "No. Items, prices, discounts, tax, and totals stay in Shopify and sync to the document. You can edit number, date, notes, and terms — not line items.",
   },
@@ -472,9 +483,9 @@ export const seoUseCases = [
 ];
 
 export const seoGuide = {
-  kicker: "Shopify order documents",
-  title: "A Shopify invoice and packing slip app built for real order desks",
-  lead: "Billoxi by XLOXI is an embedded Shopify app for invoices, packing slips, credit notes, drafts, and returns. It reads the Shopify order so items, prices, discounts, tax, and totals stay accurate — then you brand, convert, print, download PDF, or email.",
+  kicker: "Billoxi: Smart Invoice PDF",
+  title: "The Shopify Smart Invoice PDF app built for real order desks",
+  lead: "Billoxi: Smart Invoice PDF by XLOXI is an embedded Shopify app for invoices, packing slips, credit notes, drafts, and returns. Search Billoxi on the App Store — it reads the Shopify order so items, prices, discounts, tax, and totals stay accurate — then you brand, convert, print, download PDF, or email.",
   sections: [
     {
       heading: "What Billoxi creates from a Shopify order",
@@ -496,6 +507,8 @@ export const seoGuide = {
 };
 
 export const seoKeywordsBlock = [
+  "Billoxi Shopify app",
+  "Billoxi by XLOXI",
   "Shopify invoice app",
   "Shopify packing slip PDF",
   "Shopify credit note",
